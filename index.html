@@ -1,1 +1,33 @@
-<!DOCTYPE html><html><head><link rel="stylesheet" href="/csb-f3qytc/index.f600e7e6.css"><title>Parcel Sandbox</title><meta charset="utf-8"></head><body> <div id="app"></div> <script src="/csb-f3qytc/index.da2f37a6.js" type="module"></script> </body></html>
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Decoded Content</title>
+</head>
+<body>
+  <h1>Decoded Content</h1>
+  <div id="decodedContent"></div>
+
+  <script>
+    function decodeBase64Url(base64Url) {
+      const base64 = base64Url
+        .replace(/-/g, '+')
+        .replace(/_/g, '/');
+      try {
+        const decoded = atob(base64);
+        return decoded;
+      } catch (error) {
+        return "Error decoding data: " + error.message;
+      }
+    }
+
+    window.addEventListener('DOMContentLoaded', () => {
+      const urlParams = new URLSearchParams(window.location.search);
+      if (urlParams.has('data')) {
+        const dataParam = urlParams.get('data');
+        const decodedData = decodeBase64Url(dataParam);
+        document.getElementById('decodedContent').textContent = decodedData;
+      }
+    });
+  </script>
+</body>
+</html>
